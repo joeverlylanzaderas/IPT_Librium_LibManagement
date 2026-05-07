@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-0l+_k%f4!&zo%mfz!7v4$w-#uu4oxwuhb$zhf-1=xuub5+#c5v'
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'http://localhost:3000', '10.0.0.2']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'http://localhost:3000', '10.0.0.2', 'ipt-librium-libmanagement.onrender.com']
 
 # CORS Settings - Added React Native Expo origins
 CORS_ALLOWED_ORIGINS = [
@@ -18,6 +18,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:19000",
     "http://localhost:19001",
     "http://localhost:19006",
+    "http://localhost:8081",
     "exp://localhost:19000",
     "exp://10.0.0.2:19000",
 ]
