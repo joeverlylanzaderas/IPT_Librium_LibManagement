@@ -18,7 +18,7 @@ export default function RegisterScreen() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const set = (key) => (val) => {
+  const handleChange = (key) => (val) => {
     setForm((f) => ({ ...f, [key]: val }));
     setErrors((e) => ({ ...e, [key]: '' }));
   };
@@ -91,7 +91,7 @@ export default function RegisterScreen() {
               label="First Name"
               placeholder="Juan"
               value={form.firstName}
-              onChangeText={set('firstName')}
+              onChangeText={handleChange('firstName')}
               error={errors.firstName}
               containerStyle={styles.half}
             />
@@ -99,7 +99,7 @@ export default function RegisterScreen() {
               label="Last Name"
               placeholder="Dela Cruz"
               value={form.lastName}
-              onChangeText={set('lastName')}
+              onChangeText={handleChange('lastName')}
               error={errors.lastName}
               containerStyle={styles.half}
             />
@@ -111,7 +111,7 @@ export default function RegisterScreen() {
             placeholder="you@example.com"
             keyboardType="email-address"
             value={form.email}
-            onChangeText={set('email')}
+            onChangeText={handleChange('email')}
             error={errors.email}
           />
           <Input
@@ -120,7 +120,7 @@ export default function RegisterScreen() {
             placeholder="Min. 8 characters"
             secureTextEntry
             value={form.password}
-            onChangeText={set('password')}
+            onChangeText={handleChange('password')}
             error={errors.password}
           />
           <Input
@@ -129,7 +129,7 @@ export default function RegisterScreen() {
             placeholder="Repeat your password"
             secureTextEntry
             value={form.confirmPassword}
-            onChangeText={set('confirmPassword')}
+            onChangeText={handleChange('confirmPassword')}
             error={errors.confirmPassword}
           />
 

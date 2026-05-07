@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// ⚠️ Replace with your actual Render backend URL
-export const BASE_URL = 'https://your-backend.onrender.com/api';
+// Render URL
+export const BASE_URL = 'https://ipt-librium-libmanagement.onrender.com/api';
 
 // ── In-memory token cache ─────────────────────────────────────────────────────
 // SecureStore is native-only and CANNOT be awaited inside request interceptors.

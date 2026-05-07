@@ -4,6 +4,7 @@ export const COLORS = {
   primaryLight: '#ebf5ff',
   secondary: '#0e9f6e',
   danger: '#e02424',
+  error: '#e02424',     // ← add this (alias for danger)
   warning: '#ff5a1f',
   dark: '#111928',
   gray900: '#1f2937',

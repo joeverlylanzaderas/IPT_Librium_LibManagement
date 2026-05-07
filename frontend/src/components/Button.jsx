@@ -1,5 +1,11 @@
+// src/components/Button.js
 import React from 'react';
-import { TouchableOpacity, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 import { COLORS, SIZES, RADIUS } from '../../constants/theme';
 
 export default function Button({
@@ -7,33 +13,39 @@ export default function Button({
   onPress,
   loading = false,
   disabled = false,
-  variant = 'primary',   // 'primary' | 'outline' | 'danger' | 'ghost'
-  size = 'md',           // 'sm' | 'md' | 'lg'
+  variant = 'primary',
   style,
   textStyle,
 }) {
-  const isDisabled = disabled || loading;
+  const getBackgroundColor = () => {
+    if (disabled) return COLORS.gray300;
+    if (variant === 'primary') return COLORS.primary;
+    if (variant === 'secondary') return COLORS.secondary;
+    return 'transparent';
+  };
+
+  const getTextColor = () => {
+    if (disabled) return COLORS.gray500;
+    if (variant === 'outline') return COLORS.primary;
+    return COLORS.white;
+  };
 
   return (
     <TouchableOpacity
-      onPress={onPress}
-      disabled={isDisabled}
-      activeOpacity={0.8}
       style={[
-        styles.base,
-        styles[variant],
-        styles[`size_${size}`],
-        isDisabled && styles.disabled,
+        styles.button,
+        { backgroundColor: getBackgroundColor() },
+        variant === 'outline' && styles.outline,
         style,
       ]}
+      onPress={onPress}
+      disabled={disabled || loading}
+      activeOpacity={0.8}
     >
       {loading ? (
-        <ActivityIndicator
-          color={variant === 'primary' || variant === 'danger' ? COLORS.white : COLORS.primary}
-          size="small"
-        />
+        <ActivityIndicator color={getTextColor()} />
       ) : (
-        <Text style={[styles.text, styles[`text_${variant}`], textStyle]}>
+        <Text style={[styles.text, { color: getTextColor() }, textStyle]}>
           {title}
         </Text>
       )}
@@ -42,40 +54,20 @@ export default function Button({
 }
 
 const styles = StyleSheet.create({
-  base: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  button: {
+    height: 50,
     borderRadius: RADIUS.md,
-  },
-  // Variants
-  primary: {
-    backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   outline: {
-    backgroundColor: 'transparent',
     borderWidth: 1.5,
     borderColor: COLORS.primary,
-  },
-  danger: {
-    backgroundColor: COLORS.danger,
-  },
-  ghost: {
     backgroundColor: 'transparent',
   },
-  disabled: {
-    opacity: 0.5,
-  },
-  // Sizes
-  size_sm: { height: 36, paddingHorizontal: 14 },
-  size_md: { height: 48, paddingHorizontal: 20 },
-  size_lg: { height: 56, paddingHorizontal: 28 },
-  // Text
   text: {
-    fontWeight: '700',
     fontSize: SIZES.base,
+    fontWeight: '600',
   },
-  text_primary: { color: COLORS.white },
-  text_outline: { color: COLORS.primary },
-  text_danger: { color: COLORS.white },
-  text_ghost: { color: COLORS.primary },
 });
