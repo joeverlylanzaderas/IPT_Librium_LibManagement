@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Activate Your Account</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #f0ece4;
+      padding: 48px 16px;
+    }
+
+    .wrapper {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(160deg, #2c1f06 0%, #4a3210 50%, #2c1f06 100%);
+      border-radius: 20px 20px 0 0;
+      padding: 48px 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.5), transparent);
+    }
+
+    .logo-ring {
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201,168,76,0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 32px rgba(201,168,76,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      color: #f5ead0;
+      font-size: 27px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .header .tagline {
+      color: rgba(201,168,76,0.65);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    /* ── BODY ── */
+    .body {
+      background: #ffffff;
+      padding: 44px 40px;
+      border-left: 1px solid #e8e0d0;
+      border-right: 1px solid #e8e0d0;
+    }
+
+    .greeting {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #2c1f06;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .greeting em {
+      color: #9a7030;
+      font-style: normal;
+    }
+
+    .body p {
+      color: #6b5c3e;
+      font-size: 14px;
+      line-height: 1.85;
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+
+    .body p strong {
+      color: #7a5820;
+      font-weight: 600;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e0d4b8, transparent);
+      margin: 32px 0;
+    }
+
+    /* ── BUTTON ── */
+    .btn-wrapper { text-align: center; margin: 36px 0; }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7a5820 0%, #c9a84c 50%, #7a5820 100%);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 15px 52px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 20px rgba(122,88,32,0.25);
+    }
+
+    /* ── LINK BOX ── */
+    .link-box {
+      background: #faf7f0;
+      border: 1px solid #e8dfc8;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 20px 0;
+    }
+
+    .link-box p {
+      color: #a89060 !important;
+      font-size: 11px !important;
+      margin-bottom: 6px !important;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .link-box a {
+      color: #b8960a;
+      font-size: 11px;
+      word-break: break-all;
+      text-decoration: none;
+    }
+
+    /* ── FEATURES ── */
+    .features { margin: 8px 0; }
+
+    .feature-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0e8d8;
+    }
+
+    .feature-row:last-child { border-bottom: none; }
+
+    .feature-icon {
+      font-size: 17px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .feature-row p {
+      margin: 0 !important;
+      font-size: 13px !important;
+      color: #8a7050 !important;
+    }
+
+    /* ── WARNING BOX ── */
+    .warn-box {
+      background: #fdf8ee;
+      border-left: 3px solid #c9a84c;
+      border-radius: 0 6px 6px 0;
+      padding: 13px 16px;
+      margin-top: 28px;
+    }
+
+    .warn-box p {
+      color: #8a7040 !important;
+      font-size: 12px !important;
+      margin: 0 !important;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #f5f0e6;
+      border-radius: 0 0 20px 20px;
+      padding: 28px 32px;
+      text-align: center;
+      border: 1px solid #e8e0d0;
+      border-top: 1px solid #e0d4b8;
+    }
+
+    .footer-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .dot {
+      width: 4px; height: 4px;
+      background: #c9a84c;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .footer-dots span {
+      color: #b0a080;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .footer p {
+      color: #b0a080;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo-ring">📚</div>
+      <h1>Librium | Library Management System</h1>
+      <p class="tagline">Account Activation</p>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+
+      <p class="greeting">Welcome, <em>{{ user.full_name }}</em> 👋</p>
+
+      <p>Thank you for registering at <strong>Library Management System</strong>. You're one step away from accessing your account.</p>
+      <p>Click the button below to verify your email address and get started.</p>
+
+      <hr class="divider">
+
+      <div class="btn-wrapper">
+        <a href="{{ protocol }}://{{ domain }}/{{ url }}" class="btn">Activate My Account</a>
+      </div>
+
+      <div class="link-box">
+        <p>Or copy this link into your browser</p>
+        <a href="{{ protocol }}://{{ domain }}/{{ url }}">{{ protocol }}://{{ domain }}/{{ url }}</a>
+      </div>
+
+      <hr class="divider">
+
+      <div class="features">
+        <div class="feature-row">
+          <div class="feature-icon">📖</div>
+          <p>Browse and borrow from a curated library collection.</p>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">🔖</div>
+          <p>Track your borrowing history and active reservations.</p>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">🔔</div>
+          <p>Get notified about due dates and available books.</p>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <p>⚠️ This link expires in <strong style="color:#9a7030;">24 hours</strong>. If you didn't create this account, you can safely ignore this email.</p>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-dots">
+        <div class="dot"></div>
+        <span>Secure &nbsp;·&nbsp; Encrypted</span>
+        <div class="dot"></div>
+      </div>
+      <p>© 2025 Librium | Library Management System · All rights reserved</p>
+      <p style="margin-top:4px;">Contact: support@librium.com</p>
+    </div>
+
+  </div>
+</body>
+</html>
