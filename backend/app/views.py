@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from datetime import timedelta
 from .models import Category, Author, Book, Loan, Reservation, Fine
+from user.models import User
+
 from .serializers import (
     CategorySerializer, AuthorSerializer, BookSerializer,
     LoanSerializer, LoanCreateSerializer, LoanReturnRequestSerializer,
@@ -353,6 +355,13 @@ def dashboard_stats(request):
         'overdue_loans': Loan.objects.filter(return_status='none').exclude(due_date__gte=timezone.now().date()).count(),
         'active_reservations': Reservation.objects.filter(status='waiting').count(),
         'unpaid_fines': Fine.objects.filter(paid=False).count(),
+
+        # User role counts
+        'total_users': User.objects.count(),
+        'user_admins': User.objects.filter(role='admin').count(),
+        'user_librarians': User.objects.filter(role='librarian').count(),
+        'user_members': User.objects.filter(role='member').count(),
     }
+
     
     return Response(stats)

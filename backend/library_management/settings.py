@@ -7,11 +7,17 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-0l+_k%f4!&zo%mfz!7v4$w-#uu4oxwuhb$zhf-1=xuub5+#c5v'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-dev-secret-key-change-in-production')
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'http://localhost:3000', '10.0.0.2', 'ipt-librium-libmanagement.onrender.com']
 
-# CORS Settings - Added React Native Expo origins
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '10.0.0.2',
+    'ipt-librium-libmanagement-93ou.onrender.com',
+]
+
+# CORS Settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -19,12 +25,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:19001",
     "http://localhost:19006",
     "http://localhost:8081",
-    "exp://localhost:19000",
-    "exp://10.0.0.2:19000",
+    "http://127.0.0.1:8000",
+    "http://10.0.0.2:19000",
+    "http://10.0.0.2:8081",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True  # For development only
+# Remove CORS_ALLOW_ALL_ORIGINS — explicit list above handles it
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,30 +43,29 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
-    'app',         
-    'djoser',
     'corsheaders',
-    'user',         
+    'djoser',
+    'app',
+    'user',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Must be first
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',  # Disabled for API
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# This should point to your project's URL configuration (library_management folder)
 ROOT_URLCONF = 'library_management.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,6 +124,9 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -138,9 +147,9 @@ SIMPLE_JWT = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 SERVER_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
@@ -149,8 +158,8 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
     'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'DOMAIN': 'localhost:3000',      
-    'SITE_NAME': 'Librium Portal',     
+    'DOMAIN': 'localhost:3000',
+    'SITE_NAME': 'Librium Portal',
     'SERIALIZERS': {
         'user_create': 'user.serializers.UserCreateSerializer',
         'user_create_password_retype': 'user.serializers.UserCreateSerializer',
